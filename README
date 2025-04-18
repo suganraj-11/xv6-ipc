@@ -1,4 +1,4 @@
-This is inter process messaging implementation in xv6-risc
+This is a inter process messaging implementation in xv6-risc
 
 This implementation focuses on IPC through message passing
 
