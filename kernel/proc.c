@@ -308,6 +308,8 @@ fork(void)
     if(p->ofile[i])
       np->ofile[i] = filedup(p->ofile[i]);
   np->cwd = idup(p->cwd);
+  
+
   // Initialize msg_full to 0 for the child process
   np->msg_full = 0;
 

@@ -1,3 +1,7 @@
+#include "param.h"
+
+                                 
+
 // Saved registers for kernel context switches.
 struct context {
   uint64 ra;
@@ -107,3 +111,7 @@ struct proc {
   char msgbuf[128];     // Message buffer
   int msg_full;
 };
+
+
+
+extern struct proc proc[NPROC];  // Declare the global process array
