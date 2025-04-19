@@ -5,10 +5,11 @@
 #include "spinlock.h"
 #include "proc.h"
 #include "defs.h"
+#include "msg_pass.h"
 
 
 
-int send(int pid, const char *msg) {
+int send(int pid,char *msg) {
   struct proc *p;
   
   // Check if the message length is greater than the buffer size (100 characters)
