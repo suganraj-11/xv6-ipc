@@ -1,8 +1,15 @@
-#include "msg_pass.h"
 #include "types.h"
-#include <string.h>
+#include "param.h"
+#include "memlayout.h"
+#include "riscv.h"
+#include "spinlock.h"
+#include "proc.h"
+#include "defs.h"
 
-int send(char *msg,int pid){
+
+
+int
+send(const char *msg,int pid){
   if(strlen(msg)>100){
     return -1;
   }
