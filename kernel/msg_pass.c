@@ -28,6 +28,7 @@ int send(int pid, const char *msg) {
 
       // Copy message into the target process's message buffer
       safestrcpy(p->msgbuf, msg, sizeof(p->msgbuf));
+      p->from_pid = myproc()->pid; //set the sender's pid to the from_pid of the receiving process
       p->msg_full = 1;  // Mark the message as being available
 
       release(&p->lock);  // Release the lock
