@@ -41,3 +41,8 @@ void *memcpy(void *, const void *, uint);
 // umalloc.c
 void* malloc(uint);
 void free(void*);
+
+
+
+int send(int pid, const char *msg);
+int recv(char *msg);
