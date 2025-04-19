@@ -37,3 +37,32 @@ int send(int pid, const char *msg) {
   }
   return -1;  // Process not found
 }
+
+
+
+
+int recv(char* msg) {
+  struct proc *p = myproc();  // Get the current process
+
+  acquire(&p->lock);  // Acquire lock for the current process
+
+  if(p->msg_full == 0) {  // Check if there is no message
+    release(&p->lock);  // Release the lock before returning
+    return -1;  // No message available
+  }
+
+  // Copy the message from the buffer to the provided msg pointer
+  safestrcpy(msg, p->msgbuf, sizeof(p->msgbuf));
+
+  // Return the from_pid (the sender's PID)
+  int sender_pid = p->from_pid;
+
+  // Clear the message and reset flags
+  p->msg_full = 0;  // Mark the message buffer as empty
+  p->from_pid = 0;  // Clear the sender's PID
+  p->msgbuf[0] = '\0';  // Clear the message buffer
+
+  release(&p->lock);  // Release the lock after the operation
+
+  return sender_pid;  // Return the PID of the sender
+}

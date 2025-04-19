@@ -5,6 +5,7 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "msg_pass.h"
 
 uint64
 sys_exit(void)
@@ -90,4 +91,49 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+
+
+uint64
+sys_send(void) {
+  int pid;
+  char msg[100];
+
+  argint(0, &pid);
+  if(argstr(1, msg, sizeof(msg)) < 0)
+    return -1;
+
+  return send(pid, msg);
+}
+// sys_send function
+// int
+// sys_send(void) {
+//   int pid;
+//   char *msg;
+//
+//   // Fetch the arguments passed from user space
+//   if(argint(0, &pid) < 0) {
+//     return -1;  // Error fetching the process ID
+//   }
+//   if(argstr(1,msg,100) < 0) {
+//     return -1;  // Error fetching the message string
+//   }
+//
+//   // Call the send function to send the message
+//   return send(pid,msg);
+// }
+
+// sys_recv function
+uint64
+sys_recv(void) {
+  char msg[100];
+  
+  // Fetch the argument (message buffer)
+  if(argstr(0, msg, sizeof(msg)) < 0) {
+    return -1;  // Error fetching the message buffer
+  }
+  
+  // Call the recv function to receive the message
+  return recv(msg);
 }

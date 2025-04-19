@@ -1,4 +1,4 @@
-int send(char* buf,int pid);
-int recv(char* buf);
+int send(int pid,char* buf);
+int recv(char* msg);
 
 
