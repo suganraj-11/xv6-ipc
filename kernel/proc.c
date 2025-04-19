@@ -125,6 +125,7 @@ found:
   p->pid = allocpid();
   p->state = USED;
   p->msg_full=0;
+  p->from_pid=0;
 
   // Allocate a trapframe page.
   if((p->trapframe = (struct trapframe *)kalloc()) == 0){
@@ -312,6 +313,7 @@ fork(void)
 
   // Initialize msg_full to 0 for the child process
   np->msg_full = 0;
+  np->from_pid = 0;
 
   safestrcpy(np->name, p->name, sizeof(p->name));
 

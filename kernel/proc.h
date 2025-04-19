@@ -110,6 +110,7 @@ struct proc {
   char name[16];               // Process name (debugging)
   char msgbuf[128];     // Message buffer
   int msg_full;
+  int from_pid;
 };
 
 
